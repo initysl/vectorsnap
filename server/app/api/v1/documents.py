@@ -7,31 +7,49 @@ router = APIRouter(prefix="/documents", tags=["Documents"])
 
 @router.get("/{id}", response_model=DocumentResponse)
 def get_document(id: str, api_key: str = Security(verify_api_key)):
-    doc = vector_store.get_by_id(id)
-    if not doc:
-        raise HTTPException(status_code=404, detail="Document not found")
-    return doc
+    try:
+        doc = vector_store.get_by_id(id)
+        if not doc:
+            raise HTTPException(status_code=404, detail="Document not found")
+        return doc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/{id}")
 def update_document(id: str, payload: UpdateRequest):
-    vector_store.update(id, text=payload.text, metadata=payload.metadata)
-    return {"message": "Document updated"}
+    try:
+        vector_store.update(id, text=payload.text, metadata=payload.metadata)
+        return {"message": "Document updated"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/{id}")
 def delete_document(id: str):
-    vector_store.delete(id)
-    return {"message": "Document deleted"}
+    try:
+        vector_store.delete(id)
+        return {"message": "Document deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/batch/delete")
 def delete_documents_batch(payload: DeleteBatchRequest):
-    vector_store.delete_batch(payload.ids)
-    return {"message": f"Deleted {len(payload.ids)} documents"}
+    try:
+        vector_store.delete_batch(payload.ids)
+        return {"message": f"Deleted {len(payload.ids)} documents"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/stats/count", response_model=StatsResponse)
 def get_stats():
-    return {"total_documents": vector_store.count()}
+    try:
+        return {"total_documents": vector_store.count()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/clear/all")
 def clear_all():
-    vector_store.clear()
-    return {"message": "All documents cleared"}
+    try:
+        vector_store.clear()
+        return {"message": "All documents cleared"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
