@@ -26,6 +26,7 @@ server/build/
 server/dist/
 server/chroma_db
 server/*.txt
+server/logs/*.log
 
 # IDE
 .vscode/
