@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./server
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./server/.env
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - REDIS_URL=redis://redis:6379
+      - VECTORSNAP_API_KEY=${VECTORSNAP_API_KEY}
+    depends_on:
+      - redis
+    volumes:
+      - ./server/chroma_db:/app/chroma_db
+      - ./server/logs:/app/logs
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  chroma_db:
