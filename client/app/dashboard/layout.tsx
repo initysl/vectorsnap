@@ -8,7 +8,7 @@ export default function DashboardLayout({
       {/* <Sidebar /> */}
       <main className='flex-1 bg-linear-to-br from-slate-50 to-blue-50'>
         {/* <Navbar /> */}
-        <div className=''>{children}</div>
+        <div className='pt-2'>{children}</div>
       </main>
     </div>
   );
