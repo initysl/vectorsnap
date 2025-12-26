@@ -96,7 +96,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className='min-h-screen bg-linear-to-br from-slate-50 to-blue-50 flex items-center justify-center px-6'>
+    <div className='min-h-svh bg-linear-to-br from-slate-50 to-blue-50 flex items-center justify-center px-6'>
       <div className='w-full max-w-4xl flex flex-col gap-12'>
         {/* FEATURE AREA */}
         <AnimatePresence mode='wait'>
@@ -173,7 +173,7 @@ export default function LandingPage() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
         >
-          {/* Button (never animated) */}
+          {/* Button */}
           <button
             onClick={nextSlide}
             className='exo w-fit px-10 py-3 cursor-pointer rounded-2xl bg-linear-to-r from-blue-600 to-zinc-600 text-white shadow-lg  hover:from-zinc-600 hover:to-blue-600 hover:shadow-2xl hover:translate-x-0.5 active:translate-y-0 transition-all duration-500 ease-in-out
