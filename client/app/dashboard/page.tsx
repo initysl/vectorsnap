@@ -6,6 +6,7 @@ import { Upload, X, FileText, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useIngest } from '@/hooks/useIngest';
 import { IngestRequest } from '@/types';
 import Navtab from '@/components/dashboard/Navtab';
+import Textarea from '@/components/dashboard/Textarea';
 
 interface FileWithProgress {
   file: File;
@@ -156,13 +157,7 @@ export default function UploadPage() {
         >
           <Navtab />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className='text-center'
-        >
-          <div className='bg-blue-50 border border-blue-200 rounded-2xl p-6 shadow-sm'></div>
-        </motion.div>
+        <Textarea/>
 
         {/* Upload Area */}
         <motion.div
